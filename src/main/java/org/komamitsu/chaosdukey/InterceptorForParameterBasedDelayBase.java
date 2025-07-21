@@ -52,7 +52,13 @@ public class InterceptorForParameterBasedDelayBase {
   public Object intercept(
       @Origin Method origin, @SuperCall Callable<?> callable, @AllArguments Object[] args)
       throws Exception {
-    System.err.println("Able to intercept calls for the new param based delay injector");
+    System.err.println(
+        "Intercepting: "
+            + origin.getDeclaringClass().getName()
+            + "."
+            + origin.getName()
+            + " with params: "
+            + java.util.Arrays.toString(origin.getParameterTypes()));
     try {
       Map<String, String> queryOptions = getQueryOptions(args);
       boolean enableDelay =
@@ -87,13 +93,12 @@ public class InterceptorForParameterBasedDelayBase {
   }
 
   protected Map<String, String> getQueryOptions(Object[] args) {
+    System.err.println("Able to intercept calls for the new param based delay injector V1");
     try {
       if (args.length > 0) {
-        System.out.println("Extracting query options from the query");
         Map<String, String> queryOptions =
             QueryOptionsUtils.getQueryOptionsFromServerQueryRequest(args[0]);
-        System.out.println("available query options are: " + queryOptions);
-        return queryOptions;
+        return queryOptions == null ? Map.of() : queryOptions;
       }
     } catch (Exception e) {
       if (debug) {

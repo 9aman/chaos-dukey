@@ -45,7 +45,13 @@ public class InterceptorForParameterBasedMemoryAllocation {
   public Object intercept(
       @Origin Method origin, @SuperCall Callable<?> callable, @AllArguments Object[] args)
       throws Exception {
-    System.err.println("Able to intercept calls for the memory allocation injector");
+    System.err.println(
+        "Intercepting: "
+            + origin.getDeclaringClass().getName()
+            + "."
+            + origin.getName()
+            + " with params: "
+            + java.util.Arrays.toString(origin.getParameterTypes()));
     byte[] allocatedMemory = null;
     try {
       Map<String, String> queryOptions = getQueryOptions(args);
@@ -88,13 +94,12 @@ public class InterceptorForParameterBasedMemoryAllocation {
   }
 
   protected Map<String, String> getQueryOptions(Object[] args) {
+    System.err.println("Able to intercept calls for the memory allocation injector v1");
     try {
       if (args.length > 0) {
-        System.out.println("Extracting query options from the query");
         Map<String, String> queryOptions =
             QueryOptionsUtils.getQueryOptionsFromServerQueryRequest(args[0]);
-        System.out.println("available query options are: " + queryOptions);
-        return queryOptions;
+        return queryOptions == null ? Map.of() : queryOptions;
       }
     } catch (Exception e) {
       if (debug) {

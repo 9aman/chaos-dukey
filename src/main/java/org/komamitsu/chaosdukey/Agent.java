@@ -84,7 +84,12 @@ public final class Agent {
                                 ElementMatchers.named(
                                         InterceptorForParameterBasedDelayBase
                                             .V1_QUERY_DELAY_METHOD_NAME)
-                                    .and(ElementMatchers.isPublic()))
+                                    .and(ElementMatchers.isPublic())
+                                    .and(
+                                        ElementMatchers.isDeclaredBy(
+                                            ElementMatchers.named(
+                                                InterceptorForParameterBasedDelayBase
+                                                    .V1_QUERY_DELAY_CLASS_NAME))))
                             .intercept(MethodDelegation.to(interceptor)));
         if (config.debug) {
           agentBuilder = agentBuilder.with(AgentBuilder.Listener.StreamWriting.toSystemError());
@@ -108,7 +113,12 @@ public final class Agent {
                                 ElementMatchers.named(
                                         InterceptorForParameterBasedDelayBase
                                             .V1_QUERY_DELAY_METHOD_NAME)
-                                    .and(ElementMatchers.isPublic()))
+                                    .and(ElementMatchers.isPublic())
+                                    .and(
+                                        ElementMatchers.isDeclaredBy(
+                                            ElementMatchers.named(
+                                                InterceptorForParameterBasedDelayBase
+                                                    .V1_QUERY_DELAY_CLASS_NAME))))
                             .intercept(MethodDelegation.to(interceptor)));
         if (config.debug) {
           agentBuilder = agentBuilder.with(AgentBuilder.Listener.StreamWriting.toSystemError());
@@ -131,7 +141,13 @@ public final class Agent {
                         builder
                             .method(
                                 ElementMatchers.named(
-                                    InterceptorForParameterBasedDelayV2.V2_QUERY_DELAY_METHOD_NAME))
+                                        InterceptorForParameterBasedDelayV2
+                                            .V2_QUERY_DELAY_METHOD_NAME)
+                                    .and(
+                                        ElementMatchers.isDeclaredBy(
+                                            ElementMatchers.named(
+                                                InterceptorForParameterBasedDelayV2
+                                                    .V2_QUERY_DELAY_CLASS_NAME))))
                             .intercept(MethodDelegation.to(interceptor)));
         if (config.debug) {
           agentBuilder = agentBuilder.with(AgentBuilder.Listener.StreamWriting.toSystemError());
@@ -153,7 +169,13 @@ public final class Agent {
                         builder
                             .method(
                                 ElementMatchers.named(
-                                    InterceptorForParameterBasedDelayV2.V2_QUERY_DELAY_METHOD_NAME))
+                                        InterceptorForParameterBasedDelayV2
+                                            .V2_QUERY_DELAY_METHOD_NAME)
+                                    .and(
+                                        ElementMatchers.isDeclaredBy(
+                                            ElementMatchers.named(
+                                                InterceptorForParameterBasedDelayV2
+                                                    .V2_QUERY_DELAY_CLASS_NAME))))
                             .intercept(MethodDelegation.to(interceptor)));
         if (config.debug) {
           agentBuilder = agentBuilder.with(AgentBuilder.Listener.StreamWriting.toSystemError());

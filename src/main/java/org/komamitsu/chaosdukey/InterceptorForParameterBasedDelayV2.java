@@ -14,6 +14,7 @@ public class InterceptorForParameterBasedDelayV2 extends InterceptorForParameter
   @Override
   @SuppressWarnings("unchecked")
   protected Map<String, String> getQueryOptions(Object[] args) {
+    System.err.println("Able to intercept calls for the new param based delay injector V1");
     if (args.length < 2) {
       return Map.of();
     }
